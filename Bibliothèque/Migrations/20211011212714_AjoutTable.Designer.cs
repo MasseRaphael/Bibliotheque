@@ -3,14 +3,16 @@ using Bibliothèque.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bibliothèque.Migrations
 {
     [DbContext(typeof(BibliothèqueContext))]
-    partial class BibliothèqueContextModelSnapshot : ModelSnapshot
+    [Migration("20211011212714_AjoutTable")]
+    partial class AjoutTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -15,5 +15,10 @@ namespace Bibliothèque.Data
         }
 
         public DbSet<Bibliothèque.Models.Livre> Livre { get; set; }
+        public DbSet<Bibliothèque.Models.Note> Note { get; set; }
+        public DbSet<Bibliothèque.Models.Genre> Genre { get; set; }
+        public DbSet<Bibliothèque.Models.Type> Type { get; set; }
+        public DbSet<Bibliothèque.Models.Auteur> Auteur { get; set; }
+        public DbSet<Bibliothèque.Models.Statut> Statut { get; set; }
     }
 }

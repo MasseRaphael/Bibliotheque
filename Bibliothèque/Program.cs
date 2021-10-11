@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bibliothèque.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Bibliothèque
 {
@@ -13,7 +15,30 @@ namespace Bibliothèque
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            IHost host = CreateHostBuilder(args).Build();
+
+            using (IServiceScope scope = host.Services.CreateScope())
+            {
+                IServiceProvider services = scope.ServiceProvider;
+
+                try
+                {
+                    SeedData.Initialize(services);
+                    SeedData2.Initialize(services);
+                    SeedData3.Initialize(services);
+                    SeedData4.Initialize(services);
+                    SeedData5.Initialize(services);
+                    SeedData6.Initialize(services);
+                }
+                catch (Exception ex)
+                {
+                    ILogger<Program> logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred seeding the DB.");
+                }
+            }
+
+            host.Run();
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

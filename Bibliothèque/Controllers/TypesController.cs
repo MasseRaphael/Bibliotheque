@@ -7,25 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bibliothèque.Data;
 using Bibliothèque.Models;
+using Type = Bibliothèque.Models.Type;
 
 namespace Bibliothèque.Controllers
 {
-    public class LivresController : Controller
+    public class TypesController : Controller
     {
         private readonly BibliothèqueContext _context;
 
-        public LivresController(BibliothèqueContext context)
+        public TypesController(BibliothèqueContext context)
         {
             _context = context;
         }
 
-        // GET: Livres
+        // GET: Types
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Livre.ToListAsync());
+            return View(await _context.Type.ToListAsync());
         }
 
-        // GET: Livres/Details/5
+        // GET: Types/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,39 @@ namespace Bibliothèque.Controllers
                 return NotFound();
             }
 
-            Livre livre = await _context.Livre
+            var @type = await _context.Type
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (livre == null)
+            if (@type == null)
             {
                 return NotFound();
             }
 
-            return View(livre);
+            return View(@type);
         }
 
-        // GET: Livres/Create
+        // GET: Types/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Livres/Create
+        // POST: Types/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Titre,TomeNum,TitreSerie,NomPages")] Livre livre)
+        public async Task<IActionResult> Create([Bind("Id,Types")] Type @type)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(livre);
+                _context.Add(@type);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(livre);
+            return View(@type);
         }
 
-        // GET: Livres/Edit/5
+        // GET: Types/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +74,22 @@ namespace Bibliothèque.Controllers
                 return NotFound();
             }
 
-            Livre livre = await _context.Livre.FindAsync(id);
-            if (livre == null)
+            var @type = await _context.Type.FindAsync(id);
+            if (@type == null)
             {
                 return NotFound();
             }
-            return View(livre);
+            return View(@type);
         }
 
-        // POST: Livres/Edit/5
+        // POST: Types/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titre,TomeNum,TitreSerie,NomPages")] Livre livre)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Types")] Type @type)
         {
-            if (id != livre.Id)
+            if (id != @type.Id)
             {
                 return NotFound();
             }
@@ -97,12 +98,12 @@ namespace Bibliothèque.Controllers
             {
                 try
                 {
-                    _context.Update(livre);
+                    _context.Update(@type);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LivreExists(livre.Id))
+                    if (!TypeExists(@type.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +114,10 @@ namespace Bibliothèque.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(livre);
+            return View(@type);
         }
 
-        // GET: Livres/Delete/5
+        // GET: Types/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +125,30 @@ namespace Bibliothèque.Controllers
                 return NotFound();
             }
 
-            Livre livre = await _context.Livre
+            var @type = await _context.Type
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (livre == null)
+            if (@type == null)
             {
                 return NotFound();
             }
 
-            return View(livre);
+            return View(@type);
         }
 
-        // POST: Livres/Delete/5
+        // POST: Types/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            Livre livre = await _context.Livre.FindAsync(id);
-            _context.Livre.Remove(livre);
+            var @type = await _context.Type.FindAsync(id);
+            _context.Type.Remove(@type);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LivreExists(int id)
+        private bool TypeExists(int id)
         {
-            return _context.Livre.Any(e => e.Id == id);
+            return _context.Type.Any(e => e.Id == id);
         }
     }
 }

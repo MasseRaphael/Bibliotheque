@@ -12,14 +12,14 @@ namespace Bibliothèque.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new BibliothèqueContext(
+            using (BibliothèqueContext context = new BibliothèqueContext(
                 serviceProvider.GetRequiredService<
                     DbContextOptions<BibliothèqueContext>>()))
             {
-                // Look for any movies.
+                
                 if (context.Livre.Any())
                 {
-                    return;   // DB has been seeded
+                    return;   
                 }
 
                 context.Livre.AddRange(
@@ -27,40 +27,46 @@ namespace Bibliothèque.Models
                     {
                         Titre = "Frère de Loup",
                         TomeNum = 1,
-                        TitreSerie = "Chroniques des Temps Obscurs"
+                        TitreSerie = "Chroniques des Temps Obscurs",
+                        NomPages = 371
                     },
 
                     new Livre
                     {
                         Titre = "Fils de l'Eau",
                         TomeNum = 2,
-                        TitreSerie = "Chroniques des Temps Obscurs"
+                        TitreSerie = "Chroniques des Temps Obscurs",
+                        NomPages = 405
                     },
 
                     new Livre
                     {
                         Titre = "Les Mangeurs d'Ames",
                         TomeNum = 3,
-                        TitreSerie = "Chroniques des Temps Obscurs"
+                        TitreSerie = "Chroniques des Temps Obscurs",
+                        NomPages = 451
                     },
 
                     new Livre
                     {
                         Titre = "Le Banni",
                         TomeNum = 4,
-                        TitreSerie = "Chroniques des Temps Obscurs"
+                        TitreSerie = "Chroniques des Temps Obscurs",
+                        NomPages = 474
                     },
                     new Livre
                     {
                         Titre = "Le Serment",
                         TomeNum = 5,
-                        TitreSerie = "Chroniques des Temps Obscurs"
+                        TitreSerie = "Chroniques des Temps Obscurs",
+                        NomPages = 403
                     },
                     new Livre
                     {
                         Titre = "Chasseur de Fantômes",
                         TomeNum = 6,
-                        TitreSerie = "Chroniques des Temps Obscurs"
+                        TitreSerie = "Chroniques des Temps Obscurs",
+                        NomPages = 350
                     }
                 );
                 context.SaveChanges();

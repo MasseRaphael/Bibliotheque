@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Bibliothèque.Models.Livre>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Liste des livres";
 }
 
-<h1>Index</h1>
+<h1>Liste des livres</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -21,6 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.TitreSerie)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomPages)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -35,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TitreSerie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomPages)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
